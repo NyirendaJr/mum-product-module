@@ -170,8 +170,6 @@
 
         methods: {
 
-            ...mapActions('stock', ['loadStock']),
-
             loadProducts (cb) {
 
                 const self = this
@@ -191,10 +189,6 @@
                 });
             },
 
-            // callToLoadStock () {
-            //     const self = this
-            //     self.loadStock (self.compStockId)
-            // },
             trash (product) {
                 const self = this
 
