@@ -2,9 +2,9 @@
 
 namespace Thelabdevtz\MumProductModule;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Thelabdevtz\MumProductModule\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Route;
 
 class MumProductModuleServiceProvider extends ServiceProvider
 {
@@ -34,7 +34,7 @@ class MumProductModuleServiceProvider extends ServiceProvider
 
             // Publishing assets.
             $this->publishes([
-                __DIR__ . '/../resources/assets/js/routes' => resource_path('js/vendor/mum-product-module'),
+                __DIR__.'/../resources/assets/js/routes' => resource_path('js/vendor/mum-product-module'),
             ], 'spa-routes');
 
             // Publishing the translation files.

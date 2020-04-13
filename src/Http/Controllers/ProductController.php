@@ -60,14 +60,18 @@ class ProductController extends Controller
             'manufacturing_date' => 'required',
             'expire_date' => 'required',
             'buying_price' => 'required|numeric',
-            'selling_price' => 'required|numeric'
+            'selling_price' => 'required|numeric',
         ]);
 
-        if ($validator->fails()) return $this->sendResponseBadRequest($validator->errors()->first());
+        if ($validator->fails()) {
+            return $this->sendResponseBadRequest($validator->errors()->first());
+        }
 
         $product = $this->productRepository->create($request->all());
 
-        if (!$product) return $this->sendResponseBadRequest('Failed to create product');
+        if (! $product) {
+            return $this->sendResponseBadRequest('Failed to create product');
+        }
 
         return $this->sendResponseCreated($product, 'Product created successfully');
     }
@@ -82,7 +86,9 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->find($id, ['category']);
 
-        if (!$product) return $this->sendResponseNotFound();
+        if (! $product) {
+            return $this->sendResponseNotFound();
+        }
 
         return $this->sendResponseOk($product);
     }
@@ -113,16 +119,20 @@ class ProductController extends Controller
             'manufacturing_date' => 'required',
             'expire_date' => 'required',
             'buying_price' => 'required|numeric',
-            'selling_price' => 'required|numeric'
+            'selling_price' => 'required|numeric',
         ]);
 
-        if ($validator->fails()) return $this->sendResponseBadRequest($validator->errors()->first());
+        if ($validator->fails()) {
+            return $this->sendResponseBadRequest($validator->errors()->first());
+        }
 
         $payload = $request->all();
 
         $updated = $this->productRepository->update($id, $payload);
 
-        if (!$updated) return $this->sendResponseBadRequest('Failed to update');
+        if (! $updated) {
+            return $this->sendResponseBadRequest('Failed to update');
+        }
 
         return $this->sendResponseUpdated();
     }
