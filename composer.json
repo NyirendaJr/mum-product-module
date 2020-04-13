@@ -1,0 +1,59 @@
+{
+    "name": "thelabdevtz/mum-product-module",
+    "description": "The Product management module",
+    "keywords": [
+        "thelabdevtz",
+        "mum-product-module"
+    ],
+    "homepage": "https://github.com/thelabdevtz/mum-product-module",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Peter N John",
+            "email": "johnnyirenda60@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "thelabdevtz/lara-base": "dev-master"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Thelabdevtz\\MumProductModule\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Thelabdevtz\\MumProductModule\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Thelabdevtz\\MumProductModule\\MumProductModuleServiceProvider"
+            ],
+            "aliases": {
+                "MumProductModule": "Thelabdevtz\\MumProductModule\\MumProductModuleFacade"
+            }
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../lara-base"
+        }
+    ]
+}
