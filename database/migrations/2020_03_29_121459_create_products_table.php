@@ -23,12 +23,9 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->decimal('buying_price')->nullable();
             $table->decimal('selling_price')->nullable();
-            $table->bigInteger('stocks_id')->unsigned();
+            $table->bigInteger('stock_id')->unsigned();
             $table->timestamps();
 
-            // foreign keys
-            $table->foreign('stocks_id')->references('id')
-                ->on('stocks')->onDelete('cascade');
         });
     }
 

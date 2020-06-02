@@ -25,52 +25,52 @@
                     <v-form ref="productFormAdd">
                         <v-row>
 
-
                             <!-- product name-->
                             <v-col cols="12" md="6">
                                 <v-label>Name</v-label>
-                                <v-text-field single-line filled dense
-                                              v-model="productParams.name"
-                                              :rules="nameRules"
-                                              hint="product name" required>
+                                <v-text-field
+                                    single-line filled dense v-model="productParams.name"
+                                    :rules="nameRules"
+                                    hint="product name" required>
                                 </v-text-field>
                             </v-col>
 
                             <!-- category-->
                             <v-col cols="12" md="6">
                                 <v-label>Category</v-label>
-                                <v-select label="Select category" single-line filled dense
-                                          v-model="productParams.product_category_id"
-                                          item-text="name"
-                                          :items="productCategories"
-                                          item-value="id">
+                                <v-select
+                                    label="Select category" single-line filled dense
+                                    v-model="productParams.product_category_id"
+                                    item-text="name"
+                                    :items="productCategories"
+                                    item-value="id">
                                 </v-select>
                             </v-col>
 
                             <!-- Manufacturing date-->
                             <v-col cols="12" md="6">
                                 <v-label>Manufacturing Date</v-label>
-                                <v-dialog persistent lazy full-width ref="manufacturing_date_dialog"
-                                          v-model="manufacturing_date_modal"
-                                          :return-value.sync="productParams.manufacturing_date"
-                                          width="290px">
+                                <v-dialog
+                                    persistent lazy full-width ref="manufacturing_date_dialog"
+                                    v-model="manufacturing_date_modal"
+                                    :return-value.sync="productParams.manufacturing_date"
+                                    width="290px">
                                     <template v-slot:activator="{ on }">
                                         <v-text-field
-                                                single-line filled v-model="productParams.manufacturing_date"
-                                                label="Pick date"
-                                                append-icon="event"
-                                                readonly
-                                                dense
-                                                filled
-                                                v-on="on">
+                                            single-line filled v-model="productParams.manufacturing_date"
+                                            label="Pick date"
+                                            append-icon="event"
+                                            readonly
+                                            dense
+                                            filled
+                                            v-on="on">
                                         </v-text-field>
                                     </template>
                                     <v-date-picker v-model="productParams.manufacturing_date" scrollable>
                                         <v-spacer></v-spacer>
                                         <v-btn text color="primary"
                                                @click="manufacturing_date_modal = false">Cancel</v-btn>
-                                        <v-btn text
-                                               color="primary"
+                                        <v-btn text color="primary"
                                                @click="$refs.manufacturing_date_dialog.save(productParams.manufacturing_date)">
                                             OK
                                         </v-btn>
@@ -86,11 +86,12 @@
                                           :return-value.sync="productParams.expire_date"
                                           width="290px">
                                     <template v-slot:activator="{ on }">
-                                        <v-text-field single-line filled dense readonly
-                                                      v-model="productParams.expire_date"
-                                                      label="Picker in dialog"
-                                                      append-icon="event"
-                                                      v-on="on">
+                                        <v-text-field
+                                            single-line filled dense readonly
+                                            v-model="productParams.expire_date"
+                                            label="Picker in dialog"
+                                            append-icon="event"
+                                            v-on="on">
                                         </v-text-field>
                                     </template>
                                     <v-date-picker v-model="productParams.expire_date" scrollable>
@@ -107,27 +108,30 @@
                             <!--Buying price-->
                             <v-col cols="12" md="6">
                                 <v-label>Buying price</v-label>
-                                <v-text-field dense filled single-line
-                                              v-model="productParams.buying_price">
+                                <v-text-field
+                                    dense filled single-line
+                                    v-model="productParams.buying_price">
                                 </v-text-field>
                             </v-col>
 
                             <!--Selling price-->
                             <v-col cols="12" sm="6">
                                 <v-label>Selling price</v-label>
-                                <v-text-field filled single-line dense
-                                              v-model="productParams.selling_price"
-                                              single-line>
+                                <v-text-field
+                                    filled single-line dense
+                                    v-model="productParams.selling_price"
+                                    single-line>
                                 </v-text-field>
                             </v-col>
 
                             <!--Description-->
                             <v-col cols="12">
                                 <v-label>Description</v-label>
-                                <v-textarea filled dense full-width counter
-                                            v-model="productParams.description"
-                                            maxlength="120"
-                                            single-line>
+                                <v-textarea
+                                    filled dense full-width counter
+                                    v-model="productParams.description"
+                                    maxlength="120"
+                                    single-line>
                                 </v-textarea>
                             </v-col>
                             <v-col cols="12">
@@ -153,9 +157,6 @@
     export default {
         props: {
             propProductId: {
-                required: true
-            },
-            propStockId: {
                 required: true
             }
         },
@@ -187,12 +188,11 @@
             const self = this
 
             self.$store.commit('setBreadcrumbs', [
-                {label: 'Stock', to: {name: 'stock.list'}},
-                {label: 'Back', to: {name: 'stock.product.list', params: {stock_id: self.compStockPropId}}},
+                {label: 'Back', to: {name: 'product.list'}},
                 {label: 'Edit product', to: ''}
             ])
 
-            self.callToLoadStock()
+            //self.callToLoadStock()
 
             self.callToLoadProductCategories()
 
@@ -205,17 +205,13 @@
 
             ...mapState('ProductCategory', ['productCategories']),
 
-            compStockPropId () {
-                return this.propStockId
-            },
-
             compProductId () {
                 return this.propProductId
             }
         },
         methods: {
 
-            ...mapActions('stock', ['loadStock']),
+            //...mapActions('stock', ['loadStock']),
 
             ...mapActions('ProductCategory', ['loadProductCategories']),
 
@@ -263,7 +259,7 @@
 
                 self.$store.commit('showLoader')
 
-                axios.put('/mauzo/products/' + self.compProductId, payload).then(response => {
+                axios.put('/mum/products/' + self.compProductId, payload).then(response => {
 
                     self.$store.commit('showSnackbar', {
                         message: response.data.message,
@@ -276,7 +272,7 @@
                     //hide loader
                     self.$store.commit('hideLoader')
 
-                    self.$router.push({name: 'stock.product.list', params: {stock_id: self.compStockPropId}})
+                    self.$router.push({name: 'product.list'})
 
                 }).catch (error => {
                     self.$store.commit('hideLoader')

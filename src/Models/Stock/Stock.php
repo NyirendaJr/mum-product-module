@@ -8,6 +8,10 @@
 
 namespace Thelabdevtz\MumProductModule\Models\Stock;
 
-class Stock
+use Illuminate\Database\Eloquent\Model;
+use Thelabdevtz\MumProductModule\Models\Stock\Traits\Relationship\StockRelationship;
+
+class Stock extends Model
 {
+    use StockRelationship;
 }

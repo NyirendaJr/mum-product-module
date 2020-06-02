@@ -5,12 +5,12 @@
                 <div class="flex-grow-1 pa-2">
                     <v-icon>add_box</v-icon> Create new product
                 </div>
-                <div class="flex-grow-1 pa-2">
+                <!-- <div class="flex-grow-1 pa-2">
                     <v-chip label class="float-right" color="primary">
                         <v-icon left>assessment</v-icon>
                         {{ stock.stock_number }}
                     </v-chip>
-                </div>
+                </div> -->
             </div>
         </v-card>
         <!-- divider -->
@@ -23,37 +23,39 @@
                 </v-alert>
                 <v-container>
                     <v-form ref="productFormAdd">
+
                     <v-row>
-
-
                         <!-- product name-->
                         <v-col cols="12" md="6">
                             <v-label>Name</v-label>
-                            <v-text-field single-line filled dense
-                                          v-model="productParams.name"
-                                          :rules="nameRules"
-                                          hint="product name" required>
+                            <v-text-field
+                                single-line filled dense
+                                v-model="productParams.name"
+                                :rules="nameRules"
+                                hint="product name" required>
                             </v-text-field>
                         </v-col>
 
                         <!-- category-->
                         <v-col cols="12" md="6">
                             <v-label>Category</v-label>
-                            <v-select label="Select category" single-line filled dense
-                                      v-model="productParams.product_category_id"
-                                      item-text="name"
-                                      :items="productCategories"
-                                      item-value="id">
+                            <v-select
+                                label="Select category" single-line filled dense
+                                v-model="productParams.product_category_id"
+                                item-text="name"
+                                :items="productCategories"
+                                item-value="id">
                             </v-select>
                         </v-col>
 
                         <!-- Manufacturing date-->
                         <v-col cols="12" md="6">
                             <v-label>Manufacturing Date</v-label>
-                            <v-dialog persistent lazy full-width ref="manufacturing_date_dialog"
-                                    v-model="manufacturing_date_modal"
-                                    :return-value.sync="productParams.manufacturing_date"
-                                    width="290px">
+                            <v-dialog
+                                persistent lazy full-width ref="manufacturing_date_dialog"
+                                v-model="manufacturing_date_modal"
+                                :return-value.sync="productParams.manufacturing_date"
+                                width="290px">
                                 <template v-slot:activator="{ on }">
                                     <v-text-field
                                         single-line filled v-model="productParams.manufacturing_date"
@@ -61,7 +63,6 @@
                                         append-icon="event"
                                         readonly
                                         dense
-                                        filled
                                         v-on="on">
                                     </v-text-field>
                                 </template>
@@ -107,27 +108,39 @@
                         <!--Buying price-->
                         <v-col cols="12" md="6">
                             <v-label>Buying price</v-label>
-                            <v-text-field dense filled single-line
-                                          v-model="productParams.buying_price">
+                            <v-text-field
+                                dense filled single-line
+                                v-model="productParams.buying_price">
                             </v-text-field>
                         </v-col>
 
                         <!--Selling price-->
                         <v-col cols="12" sm="6">
                             <v-label>Selling price</v-label>
-                            <v-text-field filled single-line dense
-                                          v-model="productParams.selling_price"
-                                          single-line>
+                            <v-text-field
+                                filled single-line dense
+                                v-model="productParams.selling_price">
                             </v-text-field>
+                        </v-col>
+
+                        <!--Product brand-->
+                        <v-col cols="12" sm="6">
+                            <v-label>Brand</v-label>
+                            <v-combobox
+                                filled single-line dense
+                                :brands=""
+                                v-model="productParams.selling_price">
+                            </v-combobox>
                         </v-col>
 
                         <!--Description-->
                         <v-col cols="12">
                             <v-label>Description</v-label>
-                            <v-textarea filled dense full-width counter
-                                    v-model="productParams.description"
-                                    maxlength="120"
-                                    single-line>
+                            <v-textarea
+                                filled dense full-width counter
+                                v-model="productParams.description"
+                                maxlength="120"
+                                single-line>
                             </v-textarea>
                         </v-col>
                         <v-col cols="12">
@@ -139,6 +152,7 @@
                         </v-col>
                         <v-col cols="12">
                             <v-btn @click="save()" color="primary" dark>Save</v-btn>
+                            <v-btn @click="save()" color="primary" dark>Save and add another</v-btn>
                         </v-col>
                     </v-row>
                     </v-form>
@@ -151,11 +165,6 @@
 <script>
     import { mapActions, mapState } from 'vuex'
     export default {
-        props: {
-            propStockId: {
-                required: true
-            }
-        },
         data () {
             return {
                 manufacturing_date_modal: false,
@@ -182,38 +191,18 @@
         },
         mounted () {
             const self = this
-
             self.$store.commit('setBreadcrumbs', [
-                {label: 'Stock', to: {name: 'stock.list'}},
-                {label: 'Back', to: {name: 'stock.product.list', params: {stock_id: self.compStockPropId}}},
+                {label: 'Back', to: {name: 'product.list'}},
                 {label: 'Create new product', to: ''}
             ])
-
-            self.callToLoadStock()
-
             self.callToLoadProductCategories()
         },
 
         computed: {
-
-            ...mapState('stock', ['stock']),
-
             ...mapState('ProductCategory', ['productCategories']),
-
-            compStockPropId () {
-                const self = this
-                return self.propStockId
-            }
         },
         methods: {
-
-            ...mapActions('stock', ['loadStock']),
-
             ...mapActions('ProductCategory', ['loadProductCategories']),
-
-            callToLoadStock () {
-                this.loadStock(this.compStockPropId)
-            },
             callToLoadProductCategories () {
                 this.loadProductCategories(()=>{})
             },
@@ -230,13 +219,10 @@
                     is_active: self.productParams.is_active,
                     manufacturing_date: self.productParams.manufacturing_date,
                     expire_date: self.productParams.expire_date,
-                    stocks_id: self.compStockPropId
                 }
 
                 self.$store.commit('showLoader')
-
-                axios.post('/mauzo/products', payload).then(response => {
-
+                axios.post('/mum/products', payload).then(response => {
                     self.$store.commit('showSnackbar', {
                         message: response.data.message,
                         color: 'success',

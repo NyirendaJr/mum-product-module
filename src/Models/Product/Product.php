@@ -14,4 +14,6 @@ use Thelabdevtz\MumProductModule\Models\Product\Traits\Relationship\ProductRelat
 class Product extends Model
 {
     use ProductRelationship;
+
+    protected $guarded = [];
 }

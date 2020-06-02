@@ -5,23 +5,29 @@ namespace Thelabdevtz\MumProductModule\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Thelabdevtz\LaraBase\Core\ResponseHelpers;
 use Thelabdevtz\MumProductModule\Repositories\Product\ProductRepository;
-
+use Illuminate\Http\Request;
+use Thelabdevtz\MumProductModule\Models\Stock\Stock;
+use Carbon\Carbon;
+use App\Components\Stock\Repositories\StockRepository;
 class ProductController extends Controller
 {
     use ResponseHelpers;
 
-    /**
-     * @var ProductRepository
-     */
+    /** @var ProductRepository */
     private $productRepository;
+
+
+    /** @var StockRepository */
+    private $stockRepository;
 
     /**
      * ProductController constructor.
      * @param ProductRepository $productRepository
      */
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository, StockRepository $stockRepository)
     {
         $this->productRepository = $productRepository;
+        $this->stockRepository = $stockRepository;
     }
 
     /**
@@ -67,7 +73,11 @@ class ProductController extends Controller
             return $this->sendResponseBadRequest($validator->errors()->first());
         }
 
-        $product = $this->productRepository->create($request->all());
+        $stock_id = $this->createStock()->id;
+
+        $new_product_payload = array_merge(['stock_id' => $stock_id], $request->all());
+
+        $product = $this->productRepository->create($new_product_payload);
 
         if (! $product) {
             return $this->sendResponseBadRequest('Failed to create product');
@@ -152,5 +162,15 @@ class ProductController extends Controller
         }
 
         $this->sendResponseDeleted();
+    }
+
+    //create stock
+    private function createStock(){
+
+        $stock = $this->stockRepository->create([
+            'stock_number' => 'STOCK/'.Carbon::now()->format('Y/m/d')
+        ]);
+       
+        return $stock;
     }
 }

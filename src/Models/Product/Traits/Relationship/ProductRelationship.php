@@ -30,6 +30,6 @@ trait ProductRelationship
      */
     public function stock()
     {
-        return $this->belongsTo(Stock::class, 'stocks_id');
+        return $this->belongsTo(Stock::class);
     }
 }

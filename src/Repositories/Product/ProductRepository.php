@@ -21,12 +21,9 @@ class ProductRepository extends BaseRepository
 
     public function listProducts($params)
     {
-        return $this->get($params, ['category'], function ($q) use ($params) {
+        return $this->get($params, ['category', 'stock'], function ($q) use ($params) {
             $name = Arr::get($params, 'name', '');
-            //$stock_id = Arr::get($params, 'stock_id', '');
-
             $q->where('name', 'like', "%{$name}%");
-
             return $q;
         });
     }

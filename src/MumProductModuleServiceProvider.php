@@ -30,17 +30,17 @@ class MumProductModuleServiceProvider extends ServiceProvider
             // Publishing the views and components.
             $this->publishes([
                 __DIR__.'/../resources/assets/js/components' => resource_path('js/vendor/mum-product-module/components'),
-            ], 'vue-components');
+            ], 'product-module-components');
 
-            // Publishing assets.
+            // Publishing single page routes.
             $this->publishes([
                 __DIR__.'/../resources/assets/js/routes' => resource_path('js/vendor/mum-product-module'),
-            ], 'spa-routes');
+            ], 'product-module-spa-routes');
 
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/mum-product-module'),
-            ], 'lang');*/
+            // Publishing module store.
+            $this->publishes([
+                __DIR__.'/../resources/assets/js/store' => resource_path('js/vendor/mum-product-module/store'),
+            ], 'product-module-store');
 
             // Registering package commands.
             // $this->commands([]);
