@@ -25,7 +25,6 @@ class CreateProductsTable extends Migration
             $table->decimal('selling_price')->nullable();
             $table->bigInteger('stock_id')->unsigned();
             $table->timestamps();
-
         });
     }
 

@@ -2,20 +2,20 @@
 
 namespace Thelabdevtz\MumProductModule\Http\Controllers;
 
+use App\Components\Stock\Repositories\StockRepository;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Thelabdevtz\LaraBase\Core\ResponseHelpers;
-use Thelabdevtz\MumProductModule\Repositories\Product\ProductRepository;
-use Illuminate\Http\Request;
 use Thelabdevtz\MumProductModule\Models\Stock\Stock;
-use Carbon\Carbon;
-use App\Components\Stock\Repositories\StockRepository;
+use Thelabdevtz\MumProductModule\Repositories\Product\ProductRepository;
+
 class ProductController extends Controller
 {
     use ResponseHelpers;
 
     /** @var ProductRepository */
     private $productRepository;
-
 
     /** @var StockRepository */
     private $stockRepository;
@@ -165,12 +165,12 @@ class ProductController extends Controller
     }
 
     //create stock
-    private function createStock(){
-
+    private function createStock()
+    {
         $stock = $this->stockRepository->create([
-            'stock_number' => 'STOCK/'.Carbon::now()->format('Y/m/d')
+            'stock_number' => 'STOCK/'.Carbon::now()->format('Y/m/d'),
         ]);
-       
+
         return $stock;
     }
 }
