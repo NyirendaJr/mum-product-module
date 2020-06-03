@@ -132,6 +132,5 @@ class ProductController extends Controller
         return $this->stockRepository->create([
             'stock_number' => 'STOCK/'.Carbon::now()->format('Y/m/d'),
         ]);
-
     }
 }
