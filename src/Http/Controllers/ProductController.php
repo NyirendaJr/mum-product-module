@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Thelabdevtz\LaraBase\Core\ResponseHelpers;
-use Thelabdevtz\MumProductModule\Models\Stock\Stock;
 use Thelabdevtz\MumProductModule\Repositories\Product\ProductRepository;
 
 class ProductController extends Controller
