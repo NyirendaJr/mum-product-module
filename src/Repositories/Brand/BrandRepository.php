@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Thelabdevtz\MumProductModule\Repositories\Brand;
-
 
 use Illuminate\Support\Arr;
 use Thelabdevtz\LaraBase\Core\BaseRepository;
@@ -15,10 +13,12 @@ class BrandRepository extends BaseRepository
         parent::__construct($model);
     }
 
-    public function listBrands($params){
-        return $this->get($params, [], function ($q) use ($params){
+    public function listBrands($params)
+    {
+        return $this->get($params, [], function ($q) use ($params) {
             $name = Arr::get($params, 'name', '');
             $q->where('name', 'like', "%{$name}");
+
             return $q;
         });
     }
