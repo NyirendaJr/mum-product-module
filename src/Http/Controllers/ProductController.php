@@ -129,10 +129,9 @@ class ProductController extends Controller
     //create stock
     private function createStock()
     {
-        $stock = $this->stockRepository->create([
+        return $this->stockRepository->create([
             'stock_number' => 'STOCK/'.Carbon::now()->format('Y/m/d'),
         ]);
 
-        return $stock;
     }
 }
