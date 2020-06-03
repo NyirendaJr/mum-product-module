@@ -6,7 +6,6 @@ use Illuminate\Routing\Controller;
 use Thelabdevtz\LaraBase\Core\ResponseHelpers;
 use Thelabdevtz\MumProductModule\Repositories\Product\ProductRepository;
 use Illuminate\Http\Request;
-use Thelabdevtz\MumProductModule\Models\Stock\Stock;
 use Carbon\Carbon;
 use App\Components\Stock\Repositories\StockRepository;
 class ProductController extends Controller
@@ -23,6 +22,7 @@ class ProductController extends Controller
     /**
      * ProductController constructor.
      * @param ProductRepository $productRepository
+     * @param StockRepository $stockRepository
      */
     public function __construct(ProductRepository $productRepository, StockRepository $stockRepository)
     {
@@ -30,11 +30,7 @@ class ProductController extends Controller
         $this->stockRepository = $stockRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //Display a listing of the resource.
     public function index()
     {
         $products = $this->productRepository->listProducts(request()->all());
@@ -42,22 +38,13 @@ class ProductController extends Controller
         return $this->sendResponseOk($products, 'Product list ok.');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //Show the form for creating a new resource.
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //Store a newly created resource in storage.
     public function store(Request $request)
     {
         $validator = validator($request->all(), [
@@ -74,9 +61,7 @@ class ProductController extends Controller
         }
 
         $stock_id = $this->createStock()->id;
-
         $new_product_payload = array_merge(['stock_id' => $stock_id], $request->all());
-
         $product = $this->productRepository->create($new_product_payload);
 
         if (! $product) {
@@ -86,12 +71,7 @@ class ProductController extends Controller
         return $this->sendResponseCreated($product, 'Product created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Display the specified resource.
     public function show($id)
     {
         $product = $this->productRepository->find($id, ['category']);
@@ -103,24 +83,13 @@ class ProductController extends Controller
         return $this->sendResponseOk($product);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Show the form for editing the specified resource.
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //Update the specified resource in storage.
     public function update(Request $request, $id)
     {
         $validator = validator($request->all(), [
@@ -137,9 +106,7 @@ class ProductController extends Controller
         }
 
         $payload = $request->all();
-
         $updated = $this->productRepository->update($id, $payload);
-
         if (! $updated) {
             return $this->sendResponseBadRequest('Failed to update');
         }
@@ -147,12 +114,7 @@ class ProductController extends Controller
         return $this->sendResponseUpdated();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Remove the specified resource from storage.
     public function destroy($id)
     {
         try {
@@ -167,10 +129,10 @@ class ProductController extends Controller
     //create stock
     private function createStock(){
 
-        $stock = $this->stockRepository->create([
+        return $this->stockRepository->create([
             'stock_number' => 'STOCK/'.Carbon::now()->format('Y/m/d')
         ]);
-       
-        return $stock;
+
+
     }
 }
