@@ -24,6 +24,7 @@ class ProductRepository extends BaseRepository
         return $this->get($params, ['category', 'stock'], function ($q) use ($params) {
             $name = Arr::get($params, 'name', '');
             $q->where('name', 'like', "%{$name}%");
+
             return $q;
         });
     }

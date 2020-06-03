@@ -13,9 +13,10 @@ use Thelabdevtz\MumProductModule\Models\Product\Product;
 trait StockRelationship
 {
     /**
-     * get products of the stock
+     * get products of the stock.
      */
-    public function products(){
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
 }
