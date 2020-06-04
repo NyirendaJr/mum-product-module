@@ -146,7 +146,8 @@ class ProductController extends Controller
     }
 
     // Create or find brand
-    private function createOrFindBrand($brand){
+    private function createOrFindBrand($brand)
+    {
         return $this->brandRepository->findOrCreateBrand($brand);
     }
 }
