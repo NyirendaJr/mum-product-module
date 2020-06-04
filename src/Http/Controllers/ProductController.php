@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Thelabdevtz\LaraBase\Core\ResponseHelpers;
+use Thelabdevtz\MumProductModule\Repositories\Brand\BrandRepository;
 use Thelabdevtz\MumProductModule\Repositories\Product\ProductRepository;
 
 class ProductController extends Controller
@@ -19,15 +20,20 @@ class ProductController extends Controller
     /** @var StockRepository */
     private $stockRepository;
 
+    /** @var BrandRepository */
+    private $brandRepository;
+
     /**
      * ProductController constructor.
      * @param ProductRepository $productRepository
      * @param StockRepository $stockRepository
+     * @param BrandRepository $brandRepository
      */
-    public function __construct(ProductRepository $productRepository, StockRepository $stockRepository)
+    public function __construct(ProductRepository $productRepository, StockRepository $stockRepository, BrandRepository $brandRepository)
     {
         $this->productRepository = $productRepository;
         $this->stockRepository = $stockRepository;
+        $this->brandRepository = $brandRepository;
     }
 
     //Display a listing of the resource.
@@ -61,7 +67,12 @@ class ProductController extends Controller
         }
 
         $stock_id = $this->createStock()->id;
-        $new_product_payload = array_merge(['stock_id' => $stock_id], $request->all());
+        $productBrandId = $this->createOrFindBrand(request()->product_brand_id)->id;
+        $new_product_payload = array_merge(
+            ['stock_id' => $stock_id],
+            $request->all(),
+            ['product_brand_id' => $productBrandId]
+        );
         $product = $this->productRepository->create($new_product_payload);
 
         if (! $product) {
@@ -132,6 +143,10 @@ class ProductController extends Controller
         return $this->stockRepository->create([
             'stock_number' => 'STOCK/'.Carbon::now()->format('Y/m/d'),
         ]);
+    }
 
+    // Create or find brand
+    private function createOrFindBrand($brand){
+        return $this->brandRepository->findOrCreateBrand($brand);
     }
 }

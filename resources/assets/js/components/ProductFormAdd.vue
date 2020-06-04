@@ -128,8 +128,20 @@
                             <v-label>Brand</v-label>
                             <v-combobox
                                 filled single-line dense
-                                :brands=""
-                                v-model="productParams.selling_price">
+                                :items="productBrands"
+                                :search-input.sync="brandSearch"
+                                hide-selected
+                                label="Select or create product brand"
+                                v-model="productParams.brand">
+                                <template v-slot:no-data>
+                                    <v-list-item>
+                                        <v-list-item-content>
+                                            <v-list-item-title>
+                                                No results matching "<strong>{{ brandSearch }}</strong>"
+                                            </v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </template>
                             </v-combobox>
                         </v-col>
 
@@ -179,8 +191,10 @@
                     description: '',
                     buying_price: 0,
                     selling_price: 0,
-                    is_active: false
+                    is_active: false,
+                    brand: ''
                 },
+                brandSearch: null,
                 nameRules: [
                     (v) => !!v || 'Product name is required'
                 ],
@@ -196,15 +210,23 @@
                 {label: 'Create new product', to: ''}
             ])
             self.callToLoadProductCategories()
+            self.callToLoadProductBrands()
+            console.log(this.productBrands)
         },
 
         computed: {
             ...mapState('ProductCategory', ['productCategories']),
+            ...mapState('Brand', ['productBrands']),
         },
         methods: {
             ...mapActions('ProductCategory', ['loadProductCategories']),
+            ...mapActions('Brand', ['loadProductBrands']),
             callToLoadProductCategories () {
                 this.loadProductCategories(()=>{})
+            },
+
+            callToLoadProductBrands () {
+                this.loadProductBrands(()=>{})
             },
 
             save () {
@@ -219,9 +241,11 @@
                     is_active: self.productParams.is_active,
                     manufacturing_date: self.productParams.manufacturing_date,
                     expire_date: self.productParams.expire_date,
+                    product_brand_id: self.productParams.brand
                 }
 
                 self.$store.commit('showLoader')
+
                 axios.post('/mum/products', payload).then(response => {
                     self.$store.commit('showSnackbar', {
                         message: response.data.message,

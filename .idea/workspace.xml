@@ -2,12 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db08611-ee9b-4915-aa32-93c7983169dd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/assets/js/store/modules/Brand/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/assets/js/store/modules/Brand/getters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/assets/js/store/modules/Brand/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/assets/js/store/modules/Brand/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/assets/js/store/modules/Brand/state.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_29_121459_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_29_121459_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_06_03_052606_create_product_brands_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_06_03_052606_create_product_brands_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/js/components/ProductFormAdd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/js/components/ProductFormAdd.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/js/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/js/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/js/store/modules/ProductCategory/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/js/store/modules/ProductCategory/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/js/store/modules/ProductCategory/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/js/store/modules/ProductCategory/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Http/Controllers/ProductBrandController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Http/Controllers/ProductBrandController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Stock/Traits/Relationship/StockRelationship.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Stock/Traits/Relationship/StockRelationship.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repositories/Product/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/Product/ProductRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repositories/Stock/StockRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/Stock/StockRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repositories/Brand/BrandRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/Brand/BrandRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +30,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Vue Single File Component" />
-        <option value="JavaScript File" />
         <option value="package.json" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -118,7 +126,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mauzomkononi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -160,7 +168,10 @@
       <workItem from="1590632178330" duration="650000" />
       <workItem from="1590942052931" duration="4959000" />
       <workItem from="1591073399126" duration="3469000" />
-      <workItem from="1591161333537" duration="3260000" />
+      <workItem from="1591161333537" duration="4373000" />
+      <workItem from="1591176758446" duration="1420000" />
+      <workItem from="1591249830597" duration="10013000" />
+      <workItem from="1591260886043" duration="585000" />
     </task>
     <servers />
   </component>

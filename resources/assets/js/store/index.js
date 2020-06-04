@@ -3,7 +3,8 @@ import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
 import Product from './modules/Product'
-
+import Brand from './modules/Brand'
+import ProductCategory from './modules/ProductCategory'
 
 export default {
     namespaced: true,
@@ -12,6 +13,8 @@ export default {
     actions,
     mutations,
     modules: {
-        Product
+        Product,
+        Brand,
+        ProductCategory
     }
 }

@@ -18,8 +18,11 @@ class BrandRepository extends BaseRepository
         return $this->get($params, [], function ($q) use ($params) {
             $name = Arr::get($params, 'name', '');
             $q->where('name', 'like', "%{$name}");
-
             return $q;
         });
+    }
+
+    public function findOrCreateBrand($brand){
+        return $this->model::firstOrCreate(['name' => $brand]);
     }
 }
