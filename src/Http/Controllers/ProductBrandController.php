@@ -18,8 +18,10 @@ class ProductBrandController extends Controller
         $this->brandRepository = $brandRepository;
     }
 
-    public function index(){
+    public function index()
+    {
         $productBrands = $this->brandRepository->listBrands(request()->all());
+
         return $this->sendResponseOk($productBrands, 'Brand List Ok');
     }
 }
