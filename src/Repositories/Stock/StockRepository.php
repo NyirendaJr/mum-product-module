@@ -6,7 +6,7 @@
  * Time: 8:12 PM.
  */
 
-namespace App\Components\Stock\Repositories;
+namespace Thelabdevtz\MumProductModule\Repositories\Stock;
 
 use Thelabdevtz\LaraBase\Core\BaseRepository;
 use Thelabdevtz\MumProductModule\Models\Stock\Stock;
