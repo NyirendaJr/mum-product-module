@@ -19,7 +19,7 @@ class MumProductModuleServiceProvider extends ServiceProvider
     // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'mum-product-module');
     // $this->loadViewsFrom(__DIR__.'/../resources/views', 'mum-product-module');
     $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-    $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
+    $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
 
     if ($this->app->runningInConsole()) {
 

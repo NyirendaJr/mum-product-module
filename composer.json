@@ -18,10 +18,17 @@
   "require": {
     "thelabdevtz/lara-base": "dev-master"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/NyirendaJr/lara-base.git"
+    }
+  ],
   "require-dev": {
     "orchestra/testbench": "^4.0",
     "phpunit/phpunit": "^8.0"
   },
+  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "Thelabdevtz\\MumProductModule\\": "src"
