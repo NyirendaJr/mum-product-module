@@ -21,6 +21,7 @@ class ProductBrandController extends Controller
   public function index()
   {
     $productBrands = $this->brandRepository->listBrands(request()->all());
+
     return $this->sendResponseOk($productBrands, 'Brand List Ok');
   }
 }
