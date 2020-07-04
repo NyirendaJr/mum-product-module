@@ -8,20 +8,20 @@ use Thelabdevtz\MumProductModule\Repositories\Brand\BrandRepository;
 
 class ProductBrandController extends Controller
 {
-  use ResponseHelpers;
+    use ResponseHelpers;
 
-  /** @var BrandRepository */
-  private $brandRepository;
+    /** @var BrandRepository */
+    private $brandRepository;
 
-  public function __construct(BrandRepository $brandRepository)
-  {
-    $this->brandRepository = $brandRepository;
-  }
+    public function __construct(BrandRepository $brandRepository)
+    {
+        $this->brandRepository = $brandRepository;
+    }
 
-  public function index()
-  {
-    $productBrands = $this->brandRepository->listBrands(request()->all());
+    public function index()
+    {
+        $productBrands = $this->brandRepository->listBrands(request()->all());
 
-    return $this->sendResponseOk($productBrands, 'Brand List Ok');
-  }
+        return $this->sendResponseOk($productBrands, 'Brand List Ok');
+    }
 }
